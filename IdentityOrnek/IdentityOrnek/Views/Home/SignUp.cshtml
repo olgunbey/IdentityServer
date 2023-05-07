@@ -1,0 +1,30 @@
+﻿
+@model SignUpModelView
+
+<form class="row g-3" asp-action="SignUp" asp-controller="Home" method="post">
+    @if(TempData["SuccessMessage"]!=null)
+    {
+        <div class="alert alert-info">@TempData["SuccessMessage"]</div>
+    }
+    <div asp-validation-summary="ModelOnly" role="alert" class="alert alert-danger"></div>
+
+    <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail4" placeholder="Email" asp-for="Email">
+    </div>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Şifre</label>
+        <input type="password" class="form-control" id="inputPassword4" placeholder="Password" asp-for="Password">
+    </div>
+    <div class="col-12">
+        <label for="inputAddress2" class="form-label">Kullanıcı Adı</label>
+        <input type="text" class="form-control" id="inputAddress2" placeholder="UserName" asp-for="UserName">
+    </div>
+    <div class="col-md-6">
+        <label for="inputCity" class="form-label">Phone</label>
+        <input type="text" class="form-control" id="inputCity" placeholder="Phone" asp-for="Phone">
+    </div>   
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+</form>

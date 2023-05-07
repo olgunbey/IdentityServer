@@ -1,0 +1,29 @@
+﻿@using IdentityOrnek.Areas.Admin.Models;
+
+
+@model List<UserListModelView>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>User Name</td>
+            <td>Email</td>
+        </tr>
+    </thead>
+
+
+    <tbody>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

@@ -1,0 +1,19 @@
+﻿
+@model SignInModelView
+
+<form asp-action="SignIn" asp-controller="Home" asp-route-returnUrl="@Context.Request.Query["returnUrl"]" method="post">
+
+    <div class="mb-3">
+        <label for="EMail" class="form-label">UserName</label>
+        <input class="form-control" id="EMail" aria-describedby="emailHelp" asp-for="EMail">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" asp-for="Password">
+    </div>
+    <div>
+        <partial name="_ValidationError"></partial>
+    </div>
+    <a asp-action="ResetPassword" asp-controller="Home">Şifremi unuttum</a>
+    <button type="submit" class="btn btn-primary">Giriş</button>
+</form>
