@@ -59,9 +59,9 @@ namespace IdentityOrnek.Controllers
             }
             return View();
         }
-        public IActionResult SignIn(string returnUrl=null)
+        public IActionResult SignIn()
         {
-            var x = returnUrl;
+  
             return View();
         }
         [HttpPost]
