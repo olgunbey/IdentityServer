@@ -1,2 +1,38 @@
 ﻿
-<h1>Hoşgeldin @User.Identity!.Name</h1>
+@model UserViewModels
+
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <user-picture picture-url="@Model.Picture"></user-picture>
+    </div>
+</div>
+
+
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Kullanıcı Adı: </th>
+            <th>Email: </th>
+            <th>Kullanici Telefon Numarası: </th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+       
+            <tr>
+            <td>@Model.Name</td>
+            <td>@Model.Email</td>
+            <td>@Model.Phone</td>
+            </tr>
+        
+    </tbody>
+
+</table>
+
+
+

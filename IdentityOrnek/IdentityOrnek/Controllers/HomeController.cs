@@ -1,9 +1,11 @@
 ﻿using IdentityOrnek.Models;
 using IdentityOrnek.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace IdentityOrnek.Controllers
 {
@@ -45,18 +47,17 @@ namespace IdentityOrnek.Controllers
         public async Task<IActionResult> SignUp(SignUpModelView signUpModelView)
         {
             IdentityResult identityResult = await userManager.CreateAsync(new AppUser() { UserName = signUpModelView.UserName, PhoneNumber = signUpModelView.Phone, Email = signUpModelView.Email }, signUpModelView.Password);
-            if (identityResult.Succeeded)
+            if (!identityResult.Succeeded)
             {
-                TempData["SuccessMessage"] = "Üyelik kayıt işlemi başarıyla gerçekleşti";
-                return RedirectToAction();
+                ModelState.AddListErrors(identityResult.Errors.Select(x => x.Description).ToList());
+                return View();
             }
-            else
-            {
-                foreach (IdentityError item in identityResult.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, item.Description);
-                }
-            }
+            TempData["SuccessMessage"] = "Üyelik kayıt işlemi başarıyla gerçekleşti";
+
+            //foreach (IdentityError item in identityResult.Errors)
+            //{
+            //    ModelState.AddModelError(string.Empty, item.Description);
+            //}
             return View();
         }
         public IActionResult SignIn()
@@ -83,9 +84,10 @@ namespace IdentityOrnek.Controllers
 
             var signInResult = await signInManager.PasswordSignInAsync(appUser, signInModelView.Password, true, true);
             //isPersistent => Bu method Kullancı giriş yaptıktan sonra beni hatırla mantıgıyla çalışır, bilgileri cookie' de saklar
+            await signInManager.SignInWithClaimsAsync(appUser, true, new[] { new Claim("age", appUser.DateTime!.Value.ToString()!) });
             if (signInResult.Succeeded)
             {
-                return View("GirisYapildi"); //Başarıyla giriş yapıldı
+                return View("GirisYapildi"); 
             }
             else
             {
@@ -99,6 +101,7 @@ namespace IdentityOrnek.Controllers
                     ModelState.AddModelError("log1", $"{3 - total} hakkınız kaldı");
                 }
                 return View("SignIn");
+                
             }
         }
         public IActionResult ResetPassword()
@@ -118,7 +121,7 @@ namespace IdentityOrnek.Controllers
 
             string? url = Url.Action("ForgetPassword", "Home", new {userID=appUser.Id,Token=passwordResetToken },HttpContext.Request.Scheme);
 
-            await emailService.SendResetEmail(url!, resetPasswordModel.EMail!);
+            await emailService.SendResetEmail(url!, resetPasswordModel.EMail!); //IEmailService IOC'ten geliyor
 
 
             TempData["SuccessMessage"] = "Şifre yenileme linki, e posta adresine gönderilmiştir";
@@ -134,7 +137,7 @@ namespace IdentityOrnek.Controllers
         [HttpPost]
         public async Task<IActionResult> ForgetPassword(ForgetPasswordModel forgetPasswordModel)
         {
-            string userId = TempData["userId"]!.ToString()!; 
+            string userId = TempData["userID"]!.ToString()!;
             string token = TempData["token"]!.ToString()!;
 
             if(userId==null || token==null)
@@ -151,14 +154,34 @@ namespace IdentityOrnek.Controllers
             IdentityResult? result= await userManager.ResetPasswordAsync(hasUser,token!,forgetPasswordModel.Password!);
             if(result.Succeeded)
             {
-                TempData["SuccessMessage"] = "Şifreniz başarıyla yenilendi";
+              //IdentityResult identityResult= await userManager.UpdateSecurityStampAsync(hasUser); //securityStamAsync => kullanıcının şifre, email, önemli bilgileri güncellendikçe değişir
+              //  if(identityResult.Succeeded)
+              //  {
+                    TempData["SuccessMessage"] = "Şifreniz başarıyla yenilendi";
+                    return View();
+                //}
+                //return View();
+               
             }
             else
             {
                 ModelState.AddListErrors(result.Errors.Select(e => e.Description).ToList());
+                return View();
             }
-            return View();
+           
         }
+        public IActionResult GetUserList()
+        {
+            List<AppUser> AppUsers = userManager.Users.ToList();
+          List<UserViewModels> userViewModels=  AppUsers.Select(x => new UserViewModels()
+            {
+                Phone=x.PhoneNumber,
+                Email=x.Email,
+                Name=x.UserName
+            }).ToList();
+            return View(userViewModels);
+        }
+
 
     }
 }

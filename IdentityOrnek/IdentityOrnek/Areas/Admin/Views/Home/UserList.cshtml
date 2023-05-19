@@ -6,9 +6,11 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <td>ID</td>
-            <td>User Name</td>
-            <td>Email</td>
+            <th>ID</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Roller</th>
+            <th>Rol İşlemleri</th>
         </tr>
     </thead>
 
@@ -19,9 +21,14 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Email</td>
+                <th>@item.Id</th>
+                <th>@item.Name</th>
+                <th>@item.Email</th>
+                <th> <role user-id="@item.Id"></role> </th>
+                <th>
+                    <a asp-action="AssignRoleToUser" asp-controller="Role" asp-route-id="@item.Id">Rol ata</a>
+                </th>
+                
             </tr>
         }
     </tbody>

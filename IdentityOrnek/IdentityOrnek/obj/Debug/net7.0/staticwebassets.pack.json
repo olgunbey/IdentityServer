@@ -245,6 +245,26 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\olgun\\OneDrive\\Masaüstü\\Çalışmalar\\IdentityServer\\IdentityOrnek\\IdentityOrnek\\wwwroot\\userpictures\\31979683-22b0-4d8d-9ff0-f231548ab9cd.png",
+      "PackagePath": "staticwebassets\\userpictures\\31979683-22b0-4d8d-9ff0-f231548ab9cd.png"
+    },
+    {
+      "Id": "C:\\Users\\olgun\\OneDrive\\Masaüstü\\Çalışmalar\\IdentityServer\\IdentityOrnek\\IdentityOrnek\\wwwroot\\userpictures\\62fde8da-70e7-4372-81b4-af402129cdc0.png",
+      "PackagePath": "staticwebassets\\userpictures\\62fde8da-70e7-4372-81b4-af402129cdc0.png"
+    },
+    {
+      "Id": "C:\\Users\\olgun\\OneDrive\\Masaüstü\\Çalışmalar\\IdentityServer\\IdentityOrnek\\IdentityOrnek\\wwwroot\\userpictures\\79b6425c-176c-47b9-8397-c7c3c95adc8f.png",
+      "PackagePath": "staticwebassets\\userpictures\\79b6425c-176c-47b9-8397-c7c3c95adc8f.png"
+    },
+    {
+      "Id": "C:\\Users\\olgun\\OneDrive\\Masaüstü\\Çalışmalar\\IdentityServer\\IdentityOrnek\\IdentityOrnek\\wwwroot\\userpictures\\d6fac71d-3966-472f-9ab2-7c2945b81765.png",
+      "PackagePath": "staticwebassets\\userpictures\\d6fac71d-3966-472f-9ab2-7c2945b81765.png"
+    },
+    {
+      "Id": "C:\\Users\\olgun\\OneDrive\\Masaüstü\\Çalışmalar\\IdentityServer\\IdentityOrnek\\IdentityOrnek\\wwwroot\\userpictures\\de537eba-3b55-4b42-9bdc-6297962f7983.png",
+      "PackagePath": "staticwebassets\\userpictures\\de537eba-3b55-4b42-9bdc-6297962f7983.png"
+    },
+    {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.IdentityOrnek.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

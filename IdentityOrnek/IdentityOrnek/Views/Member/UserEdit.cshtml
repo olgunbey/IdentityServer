@@ -1,0 +1,57 @@
+﻿
+@model UserEditViewModels
+
+
+<form  asp-action="UserEdit" asp-controller="Member"  method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label  class="form-label" asp-for="userName"></label>
+        <input  class="form-control" asp-for="userName" />
+    </div>
+
+
+    <div class="mb-3">
+        <label  class="form-label" asp-for="Email" ></label>
+        <input  class="form-control"  asp-for="Email" />
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label" asp-for="Phone"></label>
+        <input class="form-control" asp-for="Phone" />
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label" asp-for="DateTime"></label>
+        <input class="form-control" asp-for="DateTime" />
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label" asp-for="City"></label>
+        <input type="datetime" class="form-control" asp-for="City" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" asp-for="Cinsiyet"></label>
+        <select asp-items="ViewBag.Gender" asp-for="Cinsiyet" class="form-control" >
+            <option> Cinsiyet seçiniz</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Fotograf"></label>
+        <input type="file" class="form-control" asp-for="Fotograf" />
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+
+</form>
+
+
+<div asp-validation-summary="All" class="alert-danger" role="alert"></div>
+
+@if(TempData["SuccessMessage"]!=null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
