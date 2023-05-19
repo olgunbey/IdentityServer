@@ -1,0 +1,43 @@
+﻿
+
+@model List<RoleList>
+<div class="row">
+    <div class="col-md-6 offset-md-2">
+        <h2>Roller</h2>
+    </div>
+    <div class="col-md-2">
+       <a class="btn btn-primary" asp-area="Admin" asp-action="RoleCreate" asp-controller="Role">Role ekle</a>
+    </div>
+</div>
+
+    <div class="row">
+        
+        <div class="col-md-8 offset-md-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID </th>
+                    <th>Name </th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.Name</td>
+                        <td><a asp-action="RoleUpdate" asp-area="Admin" asp-controller="Role" class="btn btn-primary" asp-route-id="@item.ID">Rol Değiştir</a></td>
+                        <td><a asp-action="RoleDelete" asp-area="Admin" asp-controller="Role" class="btn btn-primary" asp-route-id="@item.ID">Rol Sil</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        </div>
+    </div>
+
+
+
+

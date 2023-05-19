@@ -26,8 +26,8 @@ namespace IdentityOrnek.Services
             var mailMessage = new MailMessage();
             mailMessage.From = new MailAddress(EmailSettings.Email!);
             mailMessage.To.Add(tooEmail);
-            mailMessage.Subject = "Localhost | Şifre sıfırlama";
-            mailMessage.Body = $"<h4>Şifrenizi yenilemek için aşşağıdaki linke tıklayınız</h4> <p><a href='{resetEmailLink}'>Şifre yenileme</a> </p>";
+            mailMessage.Subject = "OlgunBets | Şifre sıfırlama";
+            mailMessage.Body = $"<h1>ALPEREN SIKER ADAMI </h1> <h4>Şifrenizi yenilemek için aşşağıdaki linke tıklayınız</h4> <p><a href='{resetEmailLink}'>Şifre yenileme</a> </p>";
 
 
             mailMessage.IsBodyHtml = true;

@@ -1,0 +1,30 @@
+﻿<nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">IdentityServer</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Anasayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="UserList">Üye Liste</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Index">Ana sayfaya dön</a>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Roller
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Role" asp-action="RoleList" >Tüm Roller</a></li>
+                    </ul>
+                   </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

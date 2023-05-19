@@ -1,5 +1,6 @@
 ﻿using IdentityOrnek.Areas.Admin.Models;
 using IdentityOrnek.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +20,11 @@ namespace IdentityOrnek.Areas.Admin.Controllers
         {
             return View();
         }
+        
         public async  Task<IActionResult> UserList()
         {
 
         List<AppUser> users=await user.Users.ToListAsync();
-
 
             List<UserListModelView> userListModelView = users.Select(x => new UserListModelView()
             {

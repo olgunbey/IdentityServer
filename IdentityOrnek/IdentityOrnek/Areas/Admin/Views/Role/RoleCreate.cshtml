@@ -1,0 +1,22 @@
+﻿
+
+@model RoleModelView
+
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Role oluşturma</h2>
+            <form asp-action="RoleCreate" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div> 
+                <div class="form-control">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <button type="submit" class="btn btn-primary">Oluştur</button>
+                </div>
+            </form>
+            <div>
+                <a asp-action="RoleList">Rol listesine geri dön</a>
+            </div>
+        </div>
+    </div>
+

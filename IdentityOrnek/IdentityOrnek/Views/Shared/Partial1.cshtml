@@ -1,4 +1,5 @@
-﻿@if (User.Identity.IsAuthenticated)
+﻿@using System.Security.Claims;
+@if (User.Identity.IsAuthenticated)
 {
     <ul class="navbar-nav me-0">
         <li class="nav-item dropdown">
@@ -7,12 +8,24 @@
             </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" asp-route-returnurl="/Home/Index" asp-controller="Member" asp-action="Logout">Çıkış Yap</a></li>
+                <li><a class="dropdown-item" asp-controller="Member" asp-action="Index">Profil</a></li>
+                <li><a class="dropdown-item" asp-controller="Member" asp-action="PasswordChange">Şifre değiştir</a></li>
+                @{
+                    if (User.HasClaim(x => x.Type == ClaimTypes.Role && x.Value == "Administrator"))
+                    {
+                        <li><a class="dropdown-item" asp-controller="Home" asp-action="Index" asp-area="Admin">Administrator</a></li>
+                    }
+                }
+                <li><a class="dropdown-item" asp-controller="Role" asp-action="GetClaimList" asp-area="Admin">Kullanıcı Claim sırala</a></li>
+                <li><a class="dropdown-item" asp-controller="Member" asp-action="UserEdit">Profil düzenle</a></li>
+                <li><a class="dropdown-item" asp-controller="Member" asp-action="ExchangePage">BirthdayExchangePolicy</a></li>
+
             </ul>
         </li>
     </ul>
 }
 else
 {
-    <a class="btn btn-outline-succes mx-1" asp-controller="Home" asp-action="SignIn" asp-route-returnUrl="/Member/Index">Üye Giriş</a>
+    <a class="btn btn-outline-succes mx-1" asp-controller="Home" asp-action="SignIn">Üye Giriş</a>
     <a class="btn btn-outline-succes " asp-controller="Home" asp-action="SignUp">Üye Kayıt</a>
 }

@@ -1,0 +1,15 @@
+﻿
+@model RoleUpdateModelView
+
+
+<div asp-validation-summary="All"></div>
+
+<form asp-action="RoleUpdate" asp-area="Admin" asp-controller="Role"  method="post">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+    <button>Değiştir</button>
+</form>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-info" role="alert">@TempData["SuccessMessage"]</div>
+}
