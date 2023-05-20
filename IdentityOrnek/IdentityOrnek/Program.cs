@@ -2,7 +2,9 @@ using IdentityOrnek.Areas.ClaimsProvider;
 using IdentityOrnek.CustomValidators;
 using IdentityOrnek.Localization;
 using IdentityOrnek.Models;
+using IdentityOrnek.Permissions;
 using IdentityOrnek.Requirements;
+using IdentityOrnek.Seeds;
 using IdentityOrnek.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -43,12 +45,19 @@ builder.Services.AddAuthorization(options =>
     {
         policy.AddRequirements(new AgeExpireRequirement() { ThresholdAge=18});
     });
+    options.AddPolicy("OrderPermissionReadAndDelete", policy =>
+    {
+        policy.AddRequirements(new OrderPermissionReadAndDeleteRequirement());
+    });
+
+
 });
 
 builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
 builder.Services.AddScoped<IAuthorizationHandler, ExchangeExpireRequirementHandler>();
 builder.Services.AddScoped<IClaimsTransformation, UserClaimsProvider>();
 builder.Services.AddScoped<IAuthorizationHandler, AgeExpiredRequirementHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, OrderPermissionReadAndDeleteRequirementHandler>();
 
 builder.Services.Configure<SecurityStampValidatorOptions>(opt =>
 {
@@ -71,6 +80,13 @@ builder.Services.ConfigureApplicationCookie(opt =>
 
 
 var app = builder.Build();
+
+using (var scope=app.Services.CreateScope()) //uygulama ayaga kalkarken 1 kere oluþturulacak
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
+   await PermissionSeed.PermissionSeeds(roleManager);
+
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

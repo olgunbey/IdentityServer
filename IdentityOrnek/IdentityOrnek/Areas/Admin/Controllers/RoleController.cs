@@ -59,7 +59,7 @@ namespace IdentityOrnek.Areas.Admin.Controllers
             roleUpdateModelView.Name = appRole!.Name;
             return View(roleUpdateModelView);
         }
-        [Authorize(Roles = "Hademe,Yönetici")]
+        //[Authorize(Roles = "Hademe,Yönetici")]
         [HttpPost]
         public async Task<IActionResult> RoleUpdate(RoleUpdateModelView roleUpdateModelView,string id)
         {
@@ -87,7 +87,7 @@ namespace IdentityOrnek.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(RoleController.RoleList));
         }
-        [Authorize(Roles = "Hademe")]
+        //[Authorize(Roles = "Hademe")]
         [HttpGet]
         public async Task<IActionResult> AssignRoleToUser(string id)
         {

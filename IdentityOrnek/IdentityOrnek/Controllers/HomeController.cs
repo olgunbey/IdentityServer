@@ -84,7 +84,8 @@ namespace IdentityOrnek.Controllers
 
             var signInResult = await signInManager.PasswordSignInAsync(appUser, signInModelView.Password, true, true);
             //isPersistent => Bu method Kullancı giriş yaptıktan sonra beni hatırla mantıgıyla çalışır, bilgileri cookie' de saklar
-            await signInManager.SignInWithClaimsAsync(appUser, true, new[] { new Claim("age", appUser.DateTime!.Value.ToString()!) });
+           await signInManager.SignInWithClaimsAsync(appUser, true, new[] { new Claim("age", appUser.DateTime!.Value.ToString()!) });
+           //await userManager.AddClaimAsync(appUser, new Claim("ornekKey","ornekClaim"));
             if (signInResult.Succeeded)
             {
                 return View("GirisYapildi"); 
@@ -182,6 +183,11 @@ namespace IdentityOrnek.Controllers
             return View(userViewModels);
         }
 
+        public IActionResult Kontrols()
+        {
+           var claims= User.Claims.ToList();
+            return View();
+        }
 
     }
 }
